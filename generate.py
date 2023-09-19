@@ -52,7 +52,7 @@ def bazel_info():
 
     return bazel_info_dict
 
-if __name__ == "__main__":
+def generate_config():
     parser = argparse.ArgumentParser()
     parser.add_argument("-s", "--source_dir", default=False, action="store_true",
                         help="use the original source directory instead of bazel execroot")
@@ -93,8 +93,7 @@ if __name__ == "__main__":
         os.remove(db)
 
     build_args = [
-        '--override_repository=bazel_compdb={}'.format(aspects_dir),
-        '--aspects=@bazel_compdb//:aspects.bzl%compilation_database_aspect',
+        '--aspects=@com_grail_bazel_compdb//:aspects.bzl%compilation_database_aspect',
         '--noshow_progress',
         '--noshow_loading_progress',
         '--output_groups={}'.format(_OUTPUT_GROUPS),
@@ -143,3 +142,7 @@ if __name__ == "__main__":
         except FileNotFoundError:
             pass
         os.symlink(compdb_file, link_name)
+
+
+if __name__ == "__main__":
+    generate_config()
