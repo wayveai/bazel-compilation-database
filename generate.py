@@ -94,8 +94,6 @@ def generate_config():
 
     build_args = [
         '--aspects=@com_grail_bazel_compdb//:aspects.bzl%compilation_database_aspect',
-        '--noshow_progress',
-        '--noshow_loading_progress',
         '--output_groups={}'.format(_OUTPUT_GROUPS),
         '--target_pattern_file={}'.format(targets_file.name),
     ]
